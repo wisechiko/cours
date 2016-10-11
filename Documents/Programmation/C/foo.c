@@ -112,11 +112,14 @@ char* charToBits(char c)
 		c >>= 1;
 	}
 	buffer=reverse(buffer);
+
 	return buffer;
 }
 
 
-char* bits(char* string)
+char* bits(char* string, int j) //l'int est pour savoir si on printf ou pas.
+				//seul moyen simple trouvé et fonctionnel pour supprimer l'output
+				//pour les fonctions qui vont ré-utiliser bits()
 {
 	int i=0;
 
@@ -131,36 +134,160 @@ char* bits(char* string)
 
 	while(string[i]!='\0')
 	{
+		if(j==1)
+		{
 		printf("Caractère courant : %c ; Valeur décimale : %d ; Valeur binaire : %s\n", string[i], (int)string[i], charToBits(string[i]));
+		}
+
 		strcat(buffer,charToBits(string[i]));
 		i++;
 	}
-	printf("Total en caractères : %s\n", string);
-	printf("Total en binaire : %s\n",buffer);
 	return buffer;
 }
 
 
-void flip(char* string)
+char* flip(char* string)
 {
 	int i=0;
-	char* bitsOfString=bits(string);
+	int j=0;
+
+	//il faut désactiver l'affichage caractère par caractère des printf de la fonction bits()
+	//technique du bled trouvée sur stackoverflow :
+	//génère des warnings
+	
+//	int old_stdout = dup(1);
+//	freopen("/dev/null","w",stdout);
+//	char* bitsOfString=bits(string);
+//	fclose(stdout);
+//	stdout= fdopen(old_stdout,"w");
+	//bloque tout printf interne à la fonction suivante............
+
+	char* bitsOfString=bits(string,0);
+
+	char* temp = calloc(8,sizeof(char));
 	char* outbuf = calloc(length(string),sizeof(char));
+
+	if(!(bitsOfString&&temp&&outbuf))
+	{
+		printf("In function flip, 'bitsOfString' or 'temp' or 'outbuf'  calloc failed");
+		exit(2);
+	}
 
 	while(string[i]!='\0')
 	{
-		for(int j=0;j<8;j++)
+
+		memcpy(temp,&bitsOfString[i*7],7); //on extrait le substring de 7 caractères
+		temp[7]='\0';
+
+		for(j=0;j<7;j++)
 		{
-			outbuf[i]=bitsOfString[i*8+j];
-			outbuf[i] <<= 1;
+			temp[j]^=1; //on flip chacun des caractères
 		}
+
+		//on convertit ces 7 chiffres binaires inversés en un char qui est affecté à la valeur de sortie
+		//pour ce faire, on a du faire string binaire -> int -> char.
+		//On pourrait sauter des étapes, mais en ne reprenant le code de bits() pour cette fonction et celle d'en-dessous. 
+		outbuf[i] = (char) strtol(temp,NULL,2);
 		i++;
 	}
-	printf("Une fois flip : %s\n", outbuf);
+	
+	//printf("Une fois flip/NOT : %d\n", outbuf[2]);
+	return outbuf;
 }
+
+
+char* permute_bit_fort_faible(char* string)
+{
+	//presque le même algorithme que pour la question précédente
+
+	int i=0;
+	int j=0;
+	char swap;
+
+	//il faut désactiver l'affichage caractère par caractère des printf de la fonction bits()
+	//technique du bled trouvée sur stackoverflow :
+	//génère des warnings
+
+	//int old_stdout = dup(1);
+	//freopen("/dev/null","w",stdout);
+	
+	char* bitsOfString=bits(string,0);
+	
+	//fclose(stdout);
+	//stdout= fdopen(old_stdout,"w");
+
+
+	char* temp = calloc(8,sizeof(char));
+	char* outbuf = calloc(length(string),sizeof(char));
+
+	if(!(bitsOfString&&temp&&outbuf))
+	{
+		printf("In function permute_bit_fort_faible, 'bitsOfString' or 'temp' or 'outbuf'  calloc failed");
+		exit(2);
+	}
+
+	while(string[i]!='\0')
+	{
+
+		memcpy(temp,&bitsOfString[i*7],7); //on extrait le substring de 7 caractères
+		temp[7]='\0';
+
+		//on swap les bits de poids fort et de poids faible
+		swap = temp[0];
+		temp[0]=temp[6];
+		temp[6]=swap;
+
+		//on convertit ces 7 chiffres binaires inversés en un char qui est affecté à la valeur de sortie
+		//pour ce faire, on a du faire string binaire -> int -> char
+		//On pourrait sauter des étapes, mais en ne reprenant le code de bits() pour cette fonction et celle d'au-dessus. 
+
+		outbuf[i] = (char) strtol(temp,NULL,2);
+		i++;
+	}
+
+	//printf("Une fois permutée fort-faible : %d\n", outbuf[2]);
+	return outbuf;
+}
+
+
+char* affichage_texte(char* input_binaire)
+{
+	//presque le même algorithme que pour la question précédente
+
+	int i=0;
+	int j=0;
+	char swap;
+
+	char* temp = calloc(8,sizeof(char));
+	char* outbuf = calloc(3,sizeof(char));
+
+	if(!(temp&&outbuf))
+	{
+		printf("In function flip, 'temp' or 'outbuf'  calloc failed");
+		exit(2);
+	}
+
+	while(input_binaire[i]!='\0')
+	{
+		memcpy(temp,&input_binaire[i*7],7); //on extrait le substring de 7 caractères
+		temp[7]='\0';
+
+		//on convertit ces 7 chiffres binaires en un char qui est affecté à la valeur de sortie
+		//pour ce faire, on a du faire string binaire -> int -> char
+		//On pourrait sauter des étapes, mais en ne reprenant le code de bits() pour cette fonction et celle d'au-dessus. 
+
+		outbuf[i] = (char) strtol(temp,NULL,2);
+		i++;
+	}
+
+	return outbuf;
+}
+
+
 
 int main(int argc, char** argv)
 {
+	//EXO 1
 	printf("Length : %d\n",length("foobar"));	
 	printf("Manual length : %d\n",length_manual("foobar2"));
 	printf("Digits : %d\n",digits("foo123az82"));
@@ -168,14 +295,23 @@ int main(int argc, char** argv)
 	//la fonction symbols c'est pareil avec des plages différentes
 	printf("Reverse : %s\n",reverse("foobar"));
 	printf("Find : %d\n",find("blablablaou",'u'));
-	
+
+
+	//EXO 2
 	char* string="foobar";
-	bits(string);
+	printf("\nChaîne de caractère choisie pour les fonctions de l'exercice 2 : %s\n\n",string);
 
-	flip(string);
-	//printf("bordel : %s\n",string);
+	printf("Equivalent en bits : %s\n\n",bits(string,1));
+	printf("Chaîne de caractères flip/NOT : %s\n",flip(string));
+	printf("Chaîne de caractères permutée fort-faible : %s\n\n",permute_bit_fort_faible(string));
 
-	//char* foo="0110";
-	//printf("bordel : %\n",a 
+	printf("Ces caractères sont non-imprimables. Pour vérifier que ça a bien fonctionné, il suffit de décommenter la dernière ligne avant le return pour vérifier caractère par caractère.\n\n");
+
+	printf("Input binaire : 1100110 = f et 2 o = 1101111\n");
+	char* string2 = "110011011011111101111";
+	printf("Affichage du texte corresponsant à l'input binaire : %s\n\n", affichage_texte(string2));
+
+	printf("TODO : 1/ affichage_texte alloc n'importe comment, ne prends pas depuis stdin, et doit prendre un multiple de 7 chiffres binaires actuellement."); 
+
 	return 1;
 }
