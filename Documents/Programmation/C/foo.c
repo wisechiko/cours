@@ -333,7 +333,6 @@ int main(int argc, char** argv)
 
 	printf("Ces caractères sont non-imprimables. Pour vérifier que ça a bien fonctionné, il suffit de décommenter la dernière ligne avant le return pour vérifier caractère par caractère.\n\n");
 
-	//printf("Input binaire : 1100110 = f et 2 o = 1101111 et ! = 33 = 100001\n");
 	//char* string2 = "110011011011111101111100001";
 
 	char line[256];
