@@ -118,8 +118,8 @@ char* charToBits(char c)
 
 
 char* bits(char* string, int j) //l'int est pour savoir si on printf ou pas.
-				//seul moyen simple trouvé et fonctionnel pour supprimer l'output
-				//pour les fonctions qui vont ré-utiliser bits()
+	//seul moyen simple trouvé et fonctionnel pour supprimer l'output
+	//pour les fonctions qui vont ré-utiliser bits()
 {
 	int i=0;
 
@@ -136,7 +136,7 @@ char* bits(char* string, int j) //l'int est pour savoir si on printf ou pas.
 	{
 		if(j==1)
 		{
-		printf("Caractère courant : %c ; Valeur décimale : %d ; Valeur binaire : %s\n", string[i], (int)string[i], charToBits(string[i]));
+			printf("Caractère courant : %c ; Valeur décimale : %d ; Valeur binaire : %s\n", string[i], (int)string[i], charToBits(string[i]));
 		}
 
 		strcat(buffer,charToBits(string[i]));
@@ -154,12 +154,12 @@ char* flip(char* string)
 	//il faut désactiver l'affichage caractère par caractère des printf de la fonction bits()
 	//technique du bled trouvée sur stackoverflow :
 	//génère des warnings
-	
-//	int old_stdout = dup(1);
-//	freopen("/dev/null","w",stdout);
-//	char* bitsOfString=bits(string);
-//	fclose(stdout);
-//	stdout= fdopen(old_stdout,"w");
+
+	//	int old_stdout = dup(1);
+	//	freopen("/dev/null","w",stdout);
+	//	char* bitsOfString=bits(string);
+	//	fclose(stdout);
+	//	stdout= fdopen(old_stdout,"w");
 	//bloque tout printf interne à la fonction suivante............
 
 	char* bitsOfString=bits(string,0);
@@ -190,8 +190,14 @@ char* flip(char* string)
 		outbuf[i] = (char) strtol(temp,NULL,2);
 		i++;
 	}
-	
+
 	//printf("Une fois flip/NOT : %d\n", outbuf[2]);
+
+	free(temp);
+	free(bitsOfString);
+	temp=NULL;
+	bitsOfString=NULL;
+
 	return outbuf;
 }
 
@@ -210,9 +216,9 @@ char* permute_bit_fort_faible(char* string)
 
 	//int old_stdout = dup(1);
 	//freopen("/dev/null","w",stdout);
-	
+
 	char* bitsOfString=bits(string,0);
-	
+
 	//fclose(stdout);
 	//stdout= fdopen(old_stdout,"w");
 
@@ -246,6 +252,12 @@ char* permute_bit_fort_faible(char* string)
 	}
 
 	//printf("Une fois permutée fort-faible : %d\n", outbuf[2]);
+
+	free(temp);
+	free(bitsOfString);
+	temp=NULL;
+	bitsOfString=NULL;
+
 	return outbuf;
 }
 
@@ -256,7 +268,6 @@ char* affichage_texte(char* input_binaire)
 
 	int i=0;
 	int j=0;
-	char swap;
 
 	char* temp = calloc(8,sizeof(char));
 	char* outbuf = calloc(3,sizeof(char));
@@ -270,7 +281,17 @@ char* affichage_texte(char* input_binaire)
 	while(input_binaire[i]!='\0')
 	{
 		memcpy(temp,&input_binaire[i*7],7); //on extrait le substring de 7 caractères
-		temp[7]='\0';
+
+		if(find(temp,'\0')==-1) //test pour savoir si l'on est au dernier caractère
+		{
+			temp[7]='\0';
+		}
+		else
+		{
+			memcpy(temp,&temp[0],find(temp,'\0')); //on extrait le substring du dernier char
+			outbuf[i] = (char) strtol(temp,NULL,2);
+			goto finish; // et on sort
+		}
 
 		//on convertit ces 7 chiffres binaires en un char qui est affecté à la valeur de sortie
 		//pour ce faire, on a du faire string binaire -> int -> char
@@ -279,6 +300,10 @@ char* affichage_texte(char* input_binaire)
 		outbuf[i] = (char) strtol(temp,NULL,2);
 		i++;
 	}
+
+finish:
+	free(temp);
+	temp=NULL;
 
 	return outbuf;
 }
@@ -295,6 +320,7 @@ int main(int argc, char** argv)
 	//la fonction symbols c'est pareil avec des plages différentes
 	printf("Reverse : %s\n",reverse("foobar"));
 	printf("Find : %d\n",find("blablablaou",'u'));
+	printf("Find qui doit échouer : %d\n",find("blablablaou",'z'));
 
 
 	//EXO 2
@@ -307,11 +333,17 @@ int main(int argc, char** argv)
 
 	printf("Ces caractères sont non-imprimables. Pour vérifier que ça a bien fonctionné, il suffit de décommenter la dernière ligne avant le return pour vérifier caractère par caractère.\n\n");
 
-	printf("Input binaire : 1100110 = f et 2 o = 1101111\n");
-	char* string2 = "110011011011111101111";
-	printf("Affichage du texte corresponsant à l'input binaire : %s\n\n", affichage_texte(string2));
+	//printf("Input binaire : 1100110 = f et 2 o = 1101111 et ! = 33 = 100001\n");
+	//char* string2 = "110011011011111101111100001";
 
-	printf("TODO : 1/ affichage_texte alloc n'importe comment, ne prends pas depuis stdin, et doit prendre un multiple de 7 chiffres binaires actuellement."); 
-
+	char line[256];
+	int i;
+	printf("Veuillez rentrer la châine binaire (maximum 256 caractères, pas obligatoirement multiple de 7) : \n ");
+	if(fgets(line,sizeof(line),stdin)) {
+		if(1 == sscanf(line, "%s")){
+			printf("Affichage du texte corresponsant à l'input binaire : %s\n\n", affichage_texte(line));
+		}
+	}
+	
 	return 1;
 }
