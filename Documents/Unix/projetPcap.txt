@@ -1,0 +1,6 @@
+﻿http://www.kroosec.com/2012/10/a-look-at-pcap-file-format.html
+
+D'abord, general header
+Ensuite, (header paquet + paquet) x n paquets à la suite directement.
+
+Pour le paquet, les couches sont dans l'ordre : on commence directement par les 	adresses MAC destination/source.
