@@ -1,0 +1,5 @@
+alias maj="aptitude update -y && aptitude upgrade -y && updatedb"
+alias nc="nc -C"
+alias ls="ls --color=auto"
+alias lock="xscreensaver-command -lock"
+alias msfconsole="service postgresql start && msfconsole"

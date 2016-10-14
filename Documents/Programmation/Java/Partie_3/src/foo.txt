@@ -1,2 +1,0 @@
-entier: 5
-entier: 10
