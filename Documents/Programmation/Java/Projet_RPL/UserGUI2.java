@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.StringTokenizer;	//Séparation par défaut : espace, tab ou entrée
 
-class PileUI{
+class UserGUI2{
 
 
 	public static boolean isOperande ( String s ) // c'est une lib, donc une classe statique
@@ -91,6 +91,7 @@ class PileUI{
 
 		BufferedReader entree = new BufferedReader ( new InputStreamReader( System.in ) );
 		String ligne;
+		PrintStream sortie = new PrintStream ( System.out );
 		StringTokenizer st;
 		PileRPL pile;
 		ObjEmp o;
@@ -126,16 +127,16 @@ class PileUI{
 					{
 						pile.operations(inputTraite[1][i].charAt(0));
 					}
-					System.out.println("Résultat : " + pile);
+					sortie.println("Résultat : " + pile);
 				}
 
 				catch (Exception e)
 				{
-					System.out.println("\n Opération ou caractère invalide ! Le parser a gueulé.");
+					sortie.println("\n Opération ou caractère invalide ! Le parser a gueulé.");
 				}
 
-				System.out.println("\n--------------------------------------\n");
-				System.out.println("Veuillez écrire votre nouveau calcul :\n");
+				sortie.println("\n--------------------------------------\n");
+				sortie.println("Veuillez écrire votre nouveau calcul :\n");
 
 				// passer à null dit au garbage collector de venir libérer cette mémoire
 				// qu'on instancie pas (new) des nouvelles piles à l'infini

@@ -27,6 +27,7 @@ int digits(char* string)
 	while(string[i]!='\0')
 	{
 		if ( ((int)string[i] > 47) && ((int)string[i] < 58) )
+			//faisable aussi avec if string[i] >='0' && <= '9'
 		{
 			j++;
 		}
@@ -44,6 +45,7 @@ int characters(char* string)
 	while(string[i]!='\0')
 	{
 		if ( (((int)string[i] > 96) && ((int)string[i] < 123)) || (((int)string[i] > 64) && ((int)string[i] < 91)))
+			//faisable aussi avec string[i]>='a' && <='z' || les majs...
 		{
 			j++;
 		}
@@ -55,7 +57,7 @@ int characters(char* string)
 
 char* reverse(char* string)
 {
-	char* buffer;
+	char* buffer;	// on pourrait traiter directement sur string, car c'est une copie et pas le vrai !
 	int i=0;
 
 	buffer=calloc(length(string), sizeof(char));
@@ -66,6 +68,9 @@ char* reverse(char* string)
 	}
 
 	while(string[i]!='\0')
+	// Au lieu de parcourir toute la chaîne, on pourrait faire que la moitié.
+	// Voir code corrige.c. On peut faire une boucle
+	// while(j < k) avec j initialisé à 0 et k = length-1. A chaque tour de boucle, j++ et k--.
 	{
 		buffer[i]=string[length(string)-i-2];
 		i++;
@@ -86,6 +91,7 @@ int find(char* string, char c)
 }
 
 
+//moyen de faire ça beaucoup mieux, voir corrige.c
 char* charToBits(char c)
 {
 	char* buffer;
@@ -116,7 +122,7 @@ char* charToBits(char c)
 	return buffer;
 }
 
-
+//moyen de faire ça beaucoup mieux, voir corrige.c
 char* bits(char* string, int j) //l'int est pour savoir si on printf ou pas.
 	//seul moyen simple trouvé et fonctionnel pour supprimer l'output
 	//pour les fonctions qui vont ré-utiliser bits()
@@ -146,6 +152,7 @@ char* bits(char* string, int j) //l'int est pour savoir si on printf ou pas.
 }
 
 
+//moyen de faire ça beaucoup mieux, voir corrige.c
 char* flip(char* string)
 {
 	int i=0;
@@ -240,6 +247,7 @@ char* permute_bit_fort_faible(char* string)
 		temp[7]='\0';
 
 		//on swap les bits de poids fort et de poids faible
+		//c'est du binaire, donc pas besoin de swap, juste de flip..
 		swap = temp[0];
 		temp[0]=temp[6];
 		temp[6]=swap;
@@ -264,7 +272,7 @@ char* permute_bit_fort_faible(char* string)
 
 
 char* affichage_texte(char* input_binaire)
-{
+{//demandait depuis stdin, pas depuis un argument
 	//presque le même algorithme que pour la question précédente
 
 	int i=0;
@@ -339,8 +347,8 @@ int main(int argc, char** argv)
 	char line[256];
 	int i;
 	printf("Veuillez rentrer la châine binaire (maximum 256 caractères, pas obligatoirement multiple de 7) : \n ");
-	if(fgets(line,sizeof(line),stdin)) {
-		if(1 == sscanf(line, "%s")){
+	if(fgets(line,sizeof(line),stdin)) { // prends en compte le \0
+		if(1 == sscanf(line, "%s")){ // on pourrait forcer avec %7s mais bon
 			printf("Affichage du texte corresponsant à l'input binaire : %s\n\n", affichage_texte(line));
 		}
 	}

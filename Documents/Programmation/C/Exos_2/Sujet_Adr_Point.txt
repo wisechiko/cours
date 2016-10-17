@@ -1,0 +1,43 @@
+EXERCICE 1 : Le passage par valeur / adresse (Sur des entiers)
+
+Réaliser une fonction qui reçoit un entier par adresse. Modifier cet entier dans la fonction. Imprimer cet entier avant l'appel de fonction, pendant l'appel de fonction (après la modif), puis après l'appel de fonction. Conclure.
+
+
+EXERCICE 2 : Le passage par valeur / adresse (Sur des éléments d'un tableau)
+
+1. Réaliser une fonction affiche_n qui prend deux paramètres, un tableau d'entiers et le nombre de cases n à afficher et qui affiche n valeurs du tableau.
+
+2. Passer, par valeur, le 5-ème élément du tableau à une fonction passe_valeur qui affiche cette valeur.
+
+3. Passer, par adresse, l'adresse du 5-ème élément du tableau à une fonction passe_adresse et utiliser la fonction affiche_n pour afficher les trois prochains éléments.
+
+
+EXERCICE 3 : Allocation dynamique de mémoire
+
+1. Écrire une fonction alloc_tab qui alloue puis renvoie un tableau alloué de mémoire. Demander, à l’aide d'un bon vieux scanf le nombre de case à allouer à l'utilisateur. Allouer l'espace nécessaire et remplir ce tableau avec des valeurs aléatoires appartenant à l'intervalle [15, 94]. N'oubliez pas de libérer la mémoire à la fin.
+
+2. Demander à l'utilisateur quelle case il souhaite afficher. Sans utiliser les crochets, imprimer l'entier de cette case en calculant son adresse mémoire.
+
+
+EXERCICE 4 : Un pointeur de pointeur
+
+1. Écrire une fonction alloc_mat qui alloue de la mémoire à une matrice (tableau de pointeurs de pointeurs) d'entiers. Cette fonction prend en paramètres les dimensions de la matrice à savoir le nombre de lignes (nb_l) et de colonnes (nb_c) et renvoie la matrice en sortie.
+
+2. Écrire une fonction lib_mat dont le but est de désallouer de la mémoire à une matrice.
+
+3. Écrire une fonction remp_mat qui prend en paramètres une matrice ainsi que ses dimensions et qui remplit chaque ligne avec des entiers aléatoires compris entre 1 et 9.
+
+4. Écrire une fonction affiche_mat qui permet d'afficher une matrice nb_l * nb_c dont le nom est donné en paramètre. Essayez d'afficher les éléments sans utiliser de crochets.
+
+5. Écrire une fonction test_mat qui appelle toutes ces fonctions et qui permet de déclarer, remplir puis afficher une matrice quelconque (exp 10 × 30). Ne pas oublier de désallouer la matrice.
+
+
+EXERCICE 5 : Traitement de fichiers
+
+1. Ecrire une fonction affiche_mat_ds_fic qui affiche une matrice dans un fichier
+
+2. Ecrire une fonction remp_mat_via_fic qui charge une matrice depuis un fichier
+ 
+
+
+

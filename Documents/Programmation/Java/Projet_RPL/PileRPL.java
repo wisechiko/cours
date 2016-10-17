@@ -28,40 +28,40 @@ class PileRPL{
 
 		if(index==0)
 			throw new IndexOutOfBoundsException();
-		
+
 		temp=pileTab[index-1];
 		pileTab[index-1]=null;
 		index--;
-		
+
 		return temp;
 	}
 
 
 	public boolean isFull()
 	{
-		if(index==tailleMax)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return index==tailleMax;
 	}
 
 
 	public void operations(char c)
 	{
-		ObjEmp temp;
+		ObjEmp temp = null;
 
 		try{
-				temp = pop();
+			temp = pop();
+			try{
 				temp.operations(pop(),c);
-				this.push(temp);
+			}
+			catch (IndexOutOfBoundsException e2)
+			{
+				System.out.println("Operation failed ! Probably pop failed because the stack had just one element. We're putting back the stack in the way it was before.");
+			}
+			this.push(temp);
+
 		}
-		catch (IndexOutOfBoundsException e)
+		catch (IndexOutOfBoundsException e1)
 		{
-			System.out.println("Add failed ! Probably pop failed because the stack is empty");
+			System.out.println("Operation failed ! Probably pop failed because the stack is empty");
 			System.exit(1);
 		}
 
@@ -75,7 +75,7 @@ class PileRPL{
 		for( int i=index-1 ; i>=0 ; i-- )
 		{
 			temp += pileTab[i].toString();
-			//temp += "\n---\n";
+			temp += "\n---\n";
 		}
 
 		return temp;
