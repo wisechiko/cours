@@ -1,0 +1,39 @@
+Initiée par Henri Poincaré et vraiment développée dans les années 70
+Née du constat de la faiblesse des modèles mathématiques standards aux phénomènes très complexes, typiquement avec un grand nombre de degrés de libertés
+On s'est alors rendu compte que des approches statistiques et probabilistes pouvaient donne de très bons résultats
+Ces approches sont fondamentales à la théorie du chaos
+
+Le point caractéristique des phénomènes chaotiques, c'est la très grande sensibilité aux conditions initiales (on parle d'hypercriticité). C'est l'idée de l'effet papillon : si le papillon avait battu ses ailes dans un angle légèrement différent, point de tornade.
+Un petit décalage (par exemple une petite erreur sur la connaissance d'un état initial, comme une mesure) se répercute donc et s'amplifie rapidement sur ces phénomènes
+	C'est souvent lié à une propriété fréquente des systèmes chaotiques : la récurrence.
+	Ce sont souvent des systèmes qui se reproduisent dans le temps et ces itérations successives amplifient fortement la déformation initiale.
+	On dit que la croissance de l'erreur est localement exponentielle pour les systèmes fortement chaotiques
+
+OR il ne faut pas oublier que l'étude de la mesure elle-même est une branche de la science, c'est l'étude de la méthode scientifique
+   qu'on ne peut toujours mesurer qu'avec l'incertitude des appareils de mesure qu'on utilise
+   donc les systèmes chaotiques sont imprévisibles sur le long terme, les moindres erreurs infinitésimales devenant vite significatives
+
+
+Les ordinateurs sont donc d'une aide partielle : leur puissance de stockage et de traitement d'informations multiples permet d'aborder statistiquement le problème et de faire des calculs complexes ("il y a plus de chance qu'il fasse beau demain")
+Mais le fait qu'un système soit déterministe, voire calculable, ne veut pas dire qu'il est prédictible ou qu'il n'est pas chaotique.
+Le problème n'est pas résolu par les ordinateurs, il est repoussé : on peut tenter des calculs toujours plus complexes grâce à la loi de Moore, décrivant avec toujours plus de précision statistique les phénomènes
+Mais la complexité incroyable de ces phénomènes rend une réponse absolue inatteignable aujourd'hui et à l'horizon, car la multiplicité des facteurs inhérente à ces mécanismes rends la modélisation inaccessible
+	Typiquement : si un flocon peut déclencher une avalanche, nous pourrions par le calcul établir sa trajectoire et ses coordonnées exactes pour comprendre son action.
+			Mais pour assimiler le mécanisme dans son ensemble, il faudrait aussi inclure au raisonnement tous les autres facteurs environnants qui ont permis à ce flocon d'avoir un "effet papillon", qui sont autant de causes au nombre exponentielle
+			  qu'il faudrait par ailleurs également expliquer.
+
+C'est-à-dire que la chaîne des causalités est quasiment sans fin et donc hors de portée de calcul alors même que les conditions initiales sont primordiales, ce qui accentue la logique de l'approche probabiliste et statistique.
+De très nombreux phénomènes se cumulent dont les propriétés, positions et déplacements peuvent être générateurs de conséquences d'ampleurs bien supérieurs à leurs causes.
+Philosophiquement, ce sont donc des mécanismes holistiques : ici encore, le tout peut-être plus que la somme des parties.
+
+
+Exemples de systèmes chaotiques :
+
+	- météo évidemment (petites causes ayant de grandes conséquences, effet papillon et ouragans)
+	- économie (pour le suivi des cours)
+	- les mesures (faire remonter une erreur minime à un niveau détectables)
+	- psychologie même (sensibilité aux conditions initiales)
+	- Astrophysique, etc etc etc.
+	
+
+	Trouver une ou deux images sur ces exemples

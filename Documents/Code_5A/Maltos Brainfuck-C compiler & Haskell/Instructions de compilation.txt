@@ -1,0 +1,12 @@
+
+Si jamais t'as une Linux sous la main et Haskell d'installé, pour compiler les sources en un exé c'est : ghc NaiveBf.hs -o NaiveBf
+
+Puis pour lancer : 
+./NaiveBf.hs interpret exemple.bf
+./NaiveBf.hs compile exemple.bf sortie.c
+
+Ou si tu le compiles pas avec GHC:
+runhaskell NaiveBf.hs interpret exemple.bf
+runhaskell NaiveBf.hs exemple.bf sortie.c
+
+Et bien sûr tu compiles le .c comme un grand avec gcc foo.c -o out

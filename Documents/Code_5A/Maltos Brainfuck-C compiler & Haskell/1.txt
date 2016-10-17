@@ -1,0 +1,5 @@
+version 1, ya pas de compilo juste un interpréteur. Elle est vraiment naïve genre elle fait 2 passes :
+une pour parser le Bf et l'autre pour l'interpréter. J'ai mis le code dans 3 fichiers comme ça quand je la retravaillerai
+et que je voudrais ajouter des optimisations ça se fera tout seul. Le code est pas mal (pour la version naïve encore une fois),
+à part pour parser les boucles, là je le trouve vraiment moche ?? Si je suis chaud cet aprèm j'attaque les optimisations et
+je ferai un compilo pour un backend C pour commencer, c'est le plus simple. Puis pourquoi pas vers l'ASM aussi histoire d'apprendre.

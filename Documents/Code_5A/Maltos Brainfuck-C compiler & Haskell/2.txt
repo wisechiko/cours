@@ -1,0 +1,5 @@
+Bon j'ai trippé. J'ai rajouté un compilateur Brainfuck -> C à mon implémentation naïve.
+C'est vraiment con mais la différence de perf est énorme entre l'interpréteur et l'exé
+produit par gcc avec le fichier C. J'ai compilé le .c sans les options d'optimisation de
+GCC mais il fait forcément quelques optimisations à la con, quand il voit les suites
+d'instructions qui se ressemblent toutes.
